@@ -20,3 +20,7 @@ Print messages:
 "Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
 """
 
+lastCallkey = len(calls)-1
+lastCall = calls[lastCallkey]
+print("First record of texts, "+ texts[0][0] +" texts "+ texts[0][1] +" at time "+texts[0][2])
+print("Last record of calls, "+lastCall[0]+" calls "+lastCall[1]+" at time "+lastCall[2]+", lasting "+lastCall[3]+" seconds")

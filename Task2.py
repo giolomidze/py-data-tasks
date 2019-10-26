@@ -20,3 +20,24 @@ Print a message:
 September 2016.".
 """
 
+callResults = {}
+
+for call in calls:
+
+    caller = call[0]
+    receiver = call[1]
+    callDuration = call[3]
+    
+    if caller not in callResults:
+        callResults.update({caller: int(callDuration)})
+    else:
+        callResults.update({caller: int(callResults[caller]) + int(callDuration)})
+
+    if receiver not in callResults:
+        callResults.update({receiver: int(callDuration)})
+    else:
+        callResults.update({receiver: int(callResults[receiver]) + int(callDuration)})
+
+numberWithlongestTimeSpent = sorted(callResults, key=callResults.__getitem__, reverse=True)[0]
+
+print(numberWithlongestTimeSpent + " spent the longest time, "+str(callResults[numberWithlongestTimeSpent])+" seconds, on the phone during September 2016.")
