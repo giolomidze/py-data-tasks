@@ -22,18 +22,19 @@ Print a message:
 phoneNumbers = []
 
 for text in texts:
-    if text[0] not in phoneNumbers:
-        phoneNumbers.append(text[0])
-    if text[1] not in phoneNumbers:
-        phoneNumbers.append(text[1])
+    caller = text[0]
+    receiver = text[1]
+    phoneNumbers.append(caller)
+    phoneNumbers.append(receiver)
+
 
 for call in calls:
-    if call[0] not in phoneNumbers:
-        phoneNumbers.append(call[0])
-    if call[1] not in phoneNumbers:
-        phoneNumbers.append(call[1])
+    caller = call[0]
+    receiver = call[1]
+    phoneNumbers.append(caller)
+    phoneNumbers.append(receiver)
 
-totalPhoneNumbers = str(len(phoneNumbers))
+totalPhoneNumbers = str(len(list(set(phoneNumbers))))
 
 print("There are "+totalPhoneNumbers +
       " different telephone numbers in the records.")
