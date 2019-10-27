@@ -43,3 +43,37 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+
+def extractFixedAreaCode(number):
+    if receiver.find('(') == 0 and receiver[1] == '0':
+        return number[1:number.find(')')]
+
+
+numbersCalledByBangalore = []
+telemarketers = []
+mobile = []
+fixed = []
+
+mobilePrefixes = set()
+fixedLinesAreaCodes = set()
+
+areaCodes = []
+
+for call in calls:
+    caller = call[0]
+    receiver = call[1]
+    if caller[0:5] == '(080)':
+        numbersCalledByBangalore.append(receiver)
+        if str.isspace(receiver[5:6]) and receiver[0:1] in ['7', '8', '9']:
+            mobile.append(receiver)
+            mobilePrefixes.add(receiver[0:4])
+        if receiver.find('(') == 0 and receiver[1] == '0':
+            fixed.append(receiver)
+            fixedLinesAreaCodes.add(extractFixedAreaCode(receiver))
+
+areaCodes = list(mobilePrefixes) + list(fixedLinesAreaCodes)
+
+print("The numbers called by people in Bangalore have codes:")
+for code in sorted(areaCodes):
+    print(code)
