@@ -57,6 +57,7 @@ fixed = []
 
 mobilePrefixes = set()
 fixedLinesAreaCodes = set()
+telemarketersAreaCode = set()
 
 areaCodes = []
 
@@ -65,6 +66,9 @@ for call in calls:
     receiver = call[1]
     if caller[0:5] == '(080)':
         numbersCalledByBangalore.append(receiver)
+        if receiver[0:3] == '140':
+            telemarketers.append(receiver)
+            telemarketersAreaCode.add(receiver[0:3])
         if str.isspace(receiver[5:6]) and receiver[0:1] in ['7', '8', '9']:
             mobile.append(receiver)
             mobilePrefixes.add(receiver[0:4])
@@ -72,8 +76,11 @@ for call in calls:
             fixed.append(receiver)
             fixedLinesAreaCodes.add(extractFixedAreaCode(receiver))
 
-areaCodes = list(mobilePrefixes) + list(fixedLinesAreaCodes)
+areaCodes = list(mobilePrefixes) + list(fixedLinesAreaCodes) + list(telemarketersAreaCode)
 
 print("The numbers called by people in Bangalore have codes:")
 for code in sorted(areaCodes):
     print(code)
+
+fixedLinesPercent = len(fixed) / len(numbersCalledByBangalore) * 100
+print(str(fixedLinesPercent)+" percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
