@@ -49,16 +49,16 @@ def extractFixedAreaCode(number):
     if receiver.find('(') == 0 and receiver[1] == '0':
         return number[1:number.find(')')]
 
-
-numbersCalledByBangalore = []
 telemarketers = []
 mobile = []
-fixed = set()
+
+# Thanks for the suggestion! I kept using arrays pretty irresponsibly.
+callsFromFixedLinesByBangalore = 0 
+fixedLinesInBangaloreCalledByFixedLinesInBangalore = 0
 
 mobilePrefixes = set()
 fixedLinesAreaCodes = set()
 telemarketersAreaCode = set()
-fixedNumbersInBangaloreCalledByBangalore = set()
 
 areaCodes = []
 
@@ -66,7 +66,7 @@ for call in calls:
     caller = call[0]
     receiver = call[1]
     if caller[0:5] == '(080)':
-        numbersCalledByBangalore.append(receiver)
+        callsFromFixedLinesByBangalore += 1
         if receiver[0:3] == '140':
             telemarketers.append(receiver)
             telemarketersAreaCode.add(receiver[0:3])
@@ -74,10 +74,9 @@ for call in calls:
             mobile.append(receiver)
             mobilePrefixes.add(receiver[0:4])
         if receiver.find('(') == 0 and receiver[1] == '0':
-            fixed.add(receiver)
             fixedLinesAreaCodes.add(extractFixedAreaCode(receiver))
         if receiver[0:5] == '(080)':
-            fixedNumbersInBangaloreCalledByBangalore.add(receiver)
+            fixedLinesInBangaloreCalledByFixedLinesInBangalore += 1
 
 areaCodes = list(mobilePrefixes) + list(fixedLinesAreaCodes) + list(telemarketersAreaCode)
 
@@ -85,5 +84,5 @@ print("The numbers called by people in Bangalore have codes:")
 for code in sorted(areaCodes):
     print(code)
 
-fixedLinesPercent = len(fixedNumbersInBangaloreCalledByBangalore) / len(fixed)  * 100
-print("{:.1f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(fixedLinesPercent))
+fixedLineCallPercentage = fixedLinesInBangaloreCalledByFixedLinesInBangalore / callsFromFixedLinesByBangalore  * 100
+print("{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(fixedLineCallPercentage))
