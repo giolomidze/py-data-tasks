@@ -1,5 +1,5 @@
 Task0: O (n + 4)
 Task1: O (8n + 3)
 Task2: O (5n + 3)
-Task3: O (12n + 13) + O (n log n)
-Task4: O (6n + 3) + O (n log n)
+Task3: O ((n log n) + 13)
+Task4: O ((n log n) + 3)
