@@ -1,5 +1,21 @@
-Task0: O (n + 4)
-Task1: O (8n + 3)
-Task2: O (5n + 3)
-Task3: O ((n log n) + 13)
-Task4: O ((n log n) + 3)
+The time taken reading the csv files is not being taken into account.
+
+Task0: Big O (1) - Since we pick only first and last entries of the input and printing it the length of the input 
+doesn't change complexity in this case since no matter the input there are always 4 instructions executed.
+
+Task1: O (8n + 3) -> O(n) - We have two separate inputs being iterated. Each has 4 instructions 
+which are storing all the numbers into the new array. That would be O (8n)
+Once we have all the numbers we get unique elements from the new array using set() function and determining the count using len() which is being done
+in 3 instructions. O (8n + 3). We can omit constants and the that would make Big O(n).
+
+Task2: O (5n + 3) -> O(n) - We are iterating only calls array and collecting output into callResults dictionary while adding call duration seconds 
+for each number which is being done in 5 instructions in total O (5n). Once the loop gets through all the numbers we are sorting the dictionary 
+by seconds in reverse order which gives us the number we are interested in which makes it O (5n + 3). It would be O(n) after dropping the constants.
+
+Task3: O ((n log n) + 13) -> O (n + n log n) - I use single loop and collecting area codes into appropriate sets O(n) which later I combine into single list and 
+sorting (which is: O ((n log n)) to get required output. 
+After dropping constants we get  O (n + n log n).
+
+Task4: O (n + 3) -> (n + (n log n)) - There are two sets defined and 3 separate loops. First is collecting numbers in phoneNumbersWhichTextOrReceiveCall and 
+the second one collects numbers identified as telemarketers which would have O (n) complexity. Later it gets sorted O (n log n) and printed.
+In the end we get Big O (n + (n log n))

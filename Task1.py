@@ -34,7 +34,7 @@ for call in calls:
     phoneNumbers.append(caller)
     phoneNumbers.append(receiver)
 
-totalPhoneNumbers = str(len(list(set(phoneNumbers))))
+totalPhoneNumbers = str(len(set(phoneNumbers)))
 
 print("There are "+totalPhoneNumbers +
       " different telephone numbers in the records.")
